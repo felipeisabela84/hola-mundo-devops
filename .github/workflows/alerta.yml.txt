@@ -1,0 +1,21 @@
+name: Notificacion NTFY
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  enviar-alerta:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Enviar alerta
+        run: |
+          curl -H "Title: Nuevo Push" \
+               -H "Priority: default" \
+               -d "Se hizo un push a main por ${{ github.actor }}" \
+               https://ntfy.sh/devops-itla
